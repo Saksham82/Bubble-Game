@@ -1,4 +1,9 @@
+//Event Bubbling - jisple click kroge wo element par event raise hoga
+//aur event listener na milne par event element ke parent par listener
+//dhundega vaha bhi na milne par event parent ke parent par listener dhundega
+
 let timer = 60
+let score = 0
 
 function makeBubble(){
     let clutter = ""
@@ -26,6 +31,11 @@ function runTimer(){
             clearInterval(timer)
         }
     },1000)
+}
+
+function increaseScore(){
+    score += 10
+    document.querySelector("#scoreVal").textContent = score
 }
 
 runTimer()
