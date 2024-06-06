@@ -1,9 +1,6 @@
-//Event Bubbling - jisple click kroge wo element par event raise hoga
-//aur event listener na milne par event element ke parent par listener
-//dhundega vaha bhi na milne par event parent ke parent par listener dhundega
-
 let timer = 60
 let score = 0
+let hitRn = 0
 
 function makeBubble(){
     let clutter = ""
@@ -17,8 +14,8 @@ function makeBubble(){
 }
 
 function getNewHit(){
-    let randomNumber = Math.floor(Math.random()*10)
-    document.querySelector("#hitVal").textContent = randomNumber
+    hitRn = Math.floor(Math.random()*10)
+    document.querySelector("#hitVal").textContent = hitRn
 }
 
 function runTimer(){
@@ -29,6 +26,7 @@ function runTimer(){
         }
         else{
             clearInterval(timer)
+            document.querySelector("#panel-bottom").innerHTML = `<h1>Game Over</h1>`
         }
     },1000)
 }
@@ -38,11 +36,17 @@ function increaseScore(){
     document.querySelector("#scoreVal").textContent = score
 }
 
+document.querySelector("#panel-bottom").addEventListener("click", function(dets){
+    let clickedNumber = Number(dets.target.textContent)
+    if(clickedNumber === hitRn){
+        increaseScore()
+        makeBubble()
+        getNewHit()
+    }
+})
+
 runTimer()
 getNewHit()
 makeBubble()
-
-
-
 
 
